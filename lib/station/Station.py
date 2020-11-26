@@ -22,6 +22,9 @@ logger = get_logger(__name__)
 
 
 class Station:
+    '''
+    Class to store DWD station metadata
+    '''
     __slots__ = ('station_id', 'date_from', 'date_to', 'height', 'lat', 'long', 'name', 'state')
 
     def __init__(self, station_id: str, date_from: date, date_to: date, height: int, lat: float, long: float,
@@ -37,17 +40,31 @@ class Station:
 
 
 def get_stations_in_bboxes(bboxes: Optional[List[List[float]]]) -> List[Station]:
+    '''
+    Retrieves a list of DWD station that fit inside the bounding boxes
+
+    :param bboxes: List of bounding boxes
+    :return: List of Stations
+    '''
     stations = get_stations()
+
+    if bboxes is None:
+        return stations
 
     selected_station_ids = []
     for station in stations:
-        if bboxes is None or point_in_bboxes(station.lat, station.long, bboxes):
+        if point_in_bboxes(station.lat, station.long, bboxes):
             selected_station_ids.append(station)
     return selected_station_ids
 
 
 def get_stations() -> List[Station]:
-    r = requests.get('https://opendata.dwd.de/climate_environment/CDC/help/TU_Terminwerte_Beschreibung_Stationen.txt')
+    '''
+    Get a list of all DWD stations
+
+    :return: List of Stations
+    '''
+    r = requests.get('https://opendata.dwd.de/climate_environment/CDC/observations_germany/climate/10_minutes/air_temperature/recent/zehn_min_tu_Beschreibung_Stationen.txt')
     if not r.ok:
         raise Exception("Could not get station list. Network OK?")
     raw = r.text
