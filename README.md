@@ -31,3 +31,5 @@ Afterwards, the latest data will be imported every 30 minutes.
    +  Element (List of 4 floats): a bounding box in epsg 4326 projection, for example [12.178688,51.247304,12.572479,51.439885] covers parts of Leipzig.
  * HISTORIC (bool): If true, all available historic data will be imported. Default: false
  * RECENT (bool): If true, all recent data, will be imported. Default: false
+
+This tool uses publicly available data provided by Deutscher Wetterdienst.
