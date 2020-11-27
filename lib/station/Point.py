@@ -31,6 +31,7 @@ def get_message(station: Station, quality_level: int, pressure: float, temperatu
             "id": station.station_id,
             "lat": station.lat,
             "long": station.long,
+            "height": station.height,
             "pressure_unit": "hpa",
             "temperature_2m_unit": "°C",
             "temperature_5cm_unit": "°C",
