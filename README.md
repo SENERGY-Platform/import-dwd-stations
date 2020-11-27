@@ -32,4 +32,6 @@ Afterwards, the latest data will be imported every 30 minutes.
  * HISTORIC (bool): If true, all available historic data will be imported. Default: false
  * RECENT (bool): If true, all recent data, will be imported. Default: false
 
+---
+
 This tool uses publicly available data provided by Deutscher Wetterdienst.
